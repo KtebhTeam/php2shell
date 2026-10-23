@@ -30,7 +30,7 @@ if errorlevel 1 (
 python -c "import requests, rich, bs4, urllib3, colorama; print('[+] OK')"
 echo.
 start "" "https://t.me/alktebh"
-echo [+] Done. Run: python 1337scanner.py  OR  python 1337exploit.py
-start readme.txt
+echo [+] Done. Run: python 1337scanner.py  OR  python 1337assessor.py
+start notepad README.md
 echo.
 pause
