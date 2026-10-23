@@ -6,7 +6,7 @@ c() { printf "%b%s%b" "$1" "$2" "$N"; }
 
 clear
 c "$B$BOLD" "  ============================================\n"
-c "$W$BOLD" "   1337Scanner + 1337Exploit - Unix Installer\n"
+c "$W$BOLD" "   1337Scanner + 1337Assessor - Unix Installer\n"
 c "$B"      "   Telegram: https://t.me/alktebh\n"
 c "$W"      "   Credits: A8FitHaCkEr & KTEBH WARRIORS\n"
 c "$B$BOLD" "  ============================================\n\n"
@@ -40,7 +40,8 @@ fi
 c "$B" "[*] "; c "$W" "Verifying...\n"
 $PY -c "import requests, rich, bs4, urllib3, colorama; print('[+] All modules OK')" || exit 1
 
-chmod +x 1337scanner.py 1337exploit.py 2>/dev/null || true
+# تحديث الأسماء لتكون آمنة
+chmod +x 1337scanner.py 1337assessor.py 2>/dev/null || true
 
 while true; do
     echo
@@ -48,9 +49,8 @@ while true; do
     c "$W$BOLD" "   Select what to launch:\n"
     c "$B$BOLD" "  ============================================\n\n"
     c "$W" "    [1] "; c "$B$BOLD" "1337Scanner"; c "$D" " (defensive)\n"
-    c "$W" "    [2] "; c "$B$BOLD" "1337Exploit"; c "$D" " (offensive - needs authorization)\n"
-    c "$W" "    [3] "; c "$B$BOLD" "README-1337Scanner.md\n"
-    c "$W" "    [4] "; c "$B$BOLD" "README-1337Exploit.md\n"
+    c "$W" "    [2] "; c "$B$BOLD" "1337Assessor"; c "$D" " (validation)\n"
+    c "$W" "    [3] "; c "$B$BOLD" "README.md\n"
     c "$W" "    [5] "; c "$B$BOLD" "Reinstall libraries\n"
     c "$W" "    [6] "; c "$B$BOLD" "Edit targets.txt\n"
     c "$W" "    [Q] "; c "$B$BOLD" "Quit\n\n"
@@ -60,13 +60,12 @@ while true; do
     case "$ch" in
         1) clear; $PY 1337scanner.py || true ;;
         2) clear
-           c "$W$BOLD" "  WARNING: 1337Exploit performs real RCE.\n"
+           c "$W$BOLD" "  WARNING: 1337Assessor performs active validation tests.\n"
            c "$W" "  Use ONLY on targets you have WRITTEN authorization for.\n\n"
            printf "%b  Type YES to continue: %b" "$B$BOLD" "$N"
            read -r ok
-           [ "$ok" = "YES" ] && { clear; $PY 1337exploit.py || true; } || c "$W" "[*] Aborted.\n" ;;
-        3) clear; [ -f README-1337Scanner.md ] && ${PAGER:-less} README-1337Scanner.md || c "$W" "[!] missing.\n" ;;
-        4) clear; [ -f README-1337Exploit.md ] && ${PAGER:-less} README-1337Exploit.md || c "$W" "[!] missing.\n" ;;
+           [ "$ok" = "YES" ] && { clear; $PY 1337assessor.py || true; } || c "$W" "[*] Aborted.\n" ;;
+        3) clear; [ -f README.md ] && ${PAGER:-less} README.md || c "$W" "[!] missing.\n" ;;
         5) $PY -m pip install --upgrade --force-reinstall requests rich beautifulsoup4 urllib3 colorama; c "$W" "[+] Done.\n" ;;
         6) [ -f targets.txt ] || echo "example.com" > targets.txt; ${EDITOR:-nano} targets.txt || true ;;
         q|Q) echo; c "$W" "[*] Goodbye.\n"; exit 0 ;;
