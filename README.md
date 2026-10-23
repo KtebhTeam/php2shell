@@ -8,7 +8,7 @@ An educational and defensive security toolkit for authorized vulnerability asses
 - License: Educational and Authorized Testing Only
 
 ---
-<img width="1410" height="437" alt="3243w2ge" src="https://github.com/user-attachments/assets/976a07c0-958a-460f-ab53-675683fc0d9a" />
+<img width="1410" height="437" alt="3243w2ge" src="https://github.com/user-attachments/assets/6e98c530-5482-4aa3-8de2-ba7c51a6aff3" />
 
 ## Table of Contents
 
