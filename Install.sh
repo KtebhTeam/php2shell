@@ -39,8 +39,6 @@ fi
 
 c "$B" "[*] "; c "$W" "Verifying...\n"
 $PY -c "import requests, rich, bs4, urllib3, colorama; print('[+] All modules OK')" || exit 1
-
-# تحديث الأسماء لتكون آمنة
 chmod +x 1337scanner.py 1337assessor.py 2>/dev/null || true
 
 while true; do
